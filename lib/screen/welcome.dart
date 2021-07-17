@@ -52,6 +52,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Container getWelcomeImage() {
     return Container(
+      key: Key("welcome-image"),
       child: Image.asset("assets/welcome.png", width: Get.width * 0.8),
     );
   }
