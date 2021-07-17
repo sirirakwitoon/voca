@@ -78,6 +78,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Widget buildNextButton() {
     return Container(
+      key:Key("next-button"),
       alignment: Alignment.center,
       height: buttonHeight,
       decoration: BoxDecoration(
