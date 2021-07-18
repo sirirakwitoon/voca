@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:voca/routes.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key? key}) : super(key: key);
@@ -77,20 +78,25 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget buildNextButton() {
-    return Container(
-      key:Key("next-button"),
-      alignment: Alignment.center,
-      height: buttonHeight,
-      decoration: BoxDecoration(
-        color: Color(0xff407bff),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        "Get started",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.informationPage);
+      },
+      child: Container(
+        key: Key("next-button"),
+        alignment: Alignment.center,
+        height: buttonHeight,
+        decoration: BoxDecoration(
+          color: Color(0xff407bff),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          "Get started",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
       ),
     );
