@@ -20,14 +20,30 @@ class _InformationPageState extends State<InformationPage> {
         child: Padding(
           padding: EdgeInsets.only(
               left: 28, right: 28, bottom: 36, top: Get.statusBarHeight / 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildTitlePage(),
-              buildGenderSelection(),
-              inputName(),
-              ageSelect(),
-              nextButton()
+          child: CustomScrollView(
+            physics: ClampingScrollPhysics(),
+            slivers: [
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildTitlePage(),
+                    buildGenderSelection(),
+                    inputName(),
+                    ageSelect(),
+                  ],
+                ),
+              ])),
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    nextButton(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -47,7 +63,10 @@ class _InformationPageState extends State<InformationPage> {
             children: [
               ...["15-20", "21-25", "26-30", "31-40"].map((e) => Container(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Text(e, style: TextStyle(fontSize: 18),)))
+                  child: Text(
+                    e,
+                    style: TextStyle(fontSize: 18),
+                  )))
             ],
           ),
         ));
