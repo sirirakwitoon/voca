@@ -35,16 +35,28 @@ class _InformationPageState extends State<InformationPage> {
     );
   }
 
-  DropdownButtonFormField<int> ageSelect() {
-    return DropdownButtonFormField(
-      onChanged: (Value) {
-        setState(() => {});
+  Widget ageSelect() {
+    return TextFormField(
+      onTap: () {
+        Get.bottomSheet(Container(
+          height: 350,
+          padding: EdgeInsets.all(32),
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...["15-20", "21-25", "26-30", "31-40"].map((e) => Container(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Text(e, style: TextStyle(fontSize: 18),)))
+            ],
+          ),
+        ));
       },
-      hint: Text(
-        "How old are you",
-        style: TextStyle(color: Color(0xff9d9d9d)),
-      ),
       decoration: InputDecoration(
+        suffixIcon: Icon(
+          Icons.keyboard_arrow_down_outlined,
+          color: Color(0xff407bff),
+        ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff407bff),
@@ -55,32 +67,11 @@ class _InformationPageState extends State<InformationPage> {
             color: Color(0xff407bff),
           ),
         ),
+        labelText: "Your age",
         labelStyle: TextStyle(
           color: Color(0xff9d9d9d),
         ),
       ),
-      items: [
-        DropdownMenuItem(
-          child: Text("10-15"),
-          value: 0,
-        ),
-        DropdownMenuItem(
-          child: Text("16-20"),
-          value: 1,
-        ),
-        DropdownMenuItem(
-          child: Text("21-25"),
-          value: 2,
-        ),
-        DropdownMenuItem(
-          child: Text("21-25"),
-          value: 3,
-        ),
-        DropdownMenuItem(
-          child: Text("21-25"),
-          value: 4,
-        ),
-      ],
     );
   }
 
@@ -167,6 +158,14 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget nextButton() {
     return GestureDetector(
+      onTap: () {
+        Get.bottomSheet(Container(
+          color: Colors.white,
+          width: Get.width,
+          height: 200,
+          child: Text("hello"),
+        ));
+      },
       child: Container(
         key: Key("next-button"),
         alignment: Alignment.center,
