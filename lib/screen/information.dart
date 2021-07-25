@@ -11,6 +11,7 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
+  late TextEditingController ageController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +54,8 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget ageSelect() {
     return TextFormField(
+      key: Key("age"),
+      controller: ageController,
       onTap: () {
         Get.bottomSheet(Container(
           height: 350,
@@ -61,12 +64,21 @@ class _InformationPageState extends State<InformationPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...["15-20", "21-25", "26-30", "31-40"].map((e) => Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    e,
-                    style: TextStyle(fontSize: 18),
-                  )))
+              ...["15-20", "21-25", "26-30", "31-40"]
+                  .map((e) => GestureDetector(
+                        onTap: () {
+                          Get.back();
+                          setState(() {
+                            ageController.text = e;
+                          });
+                        },
+                        child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              e,
+                              style: TextStyle(fontSize: 18),
+                            )),
+                      ))
             ],
           ),
         ));
@@ -96,6 +108,7 @@ class _InformationPageState extends State<InformationPage> {
 
   TextFormField inputName() {
     return TextFormField(
+      key: Key("inputName"),
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
@@ -117,6 +130,7 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget buildGenderSelection() {
     return Container(
+      key: Key("gender"),
       margin: EdgeInsets.only(top: 24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,6 +175,7 @@ class _InformationPageState extends State<InformationPage> {
 
   Column buildTitlePage() {
     return Column(
+      key: Key("title"),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -177,14 +192,8 @@ class _InformationPageState extends State<InformationPage> {
 
   Widget nextButton() {
     return GestureDetector(
-      onTap: () {
-        Get.bottomSheet(Container(
-          color: Colors.white,
-          width: Get.width,
-          height: 200,
-          child: Text("hello"),
-        ));
-      },
+      key: Key("next"),
+      onTap: () {},
       child: Container(
         key: Key("next-button"),
         alignment: Alignment.center,

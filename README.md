@@ -16,4 +16,4 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## Run integration test
-flutter drive --driver=./test_driver/filename.dart --target=test_driver/main.dart
+flutter drive --driver=./test_driver/filename.dart --target=test_driver/app.dart
