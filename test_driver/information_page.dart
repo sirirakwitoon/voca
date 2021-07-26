@@ -24,6 +24,7 @@ void main() {
       await driver.waitFor(find.text("Who are you?"));
       await driver.waitFor(find.text("Tell us about yourself"));
       await driver.waitFor(find.byValueKey("gender"));
+      await driver.tap(find.byValueKey("gender-select-Male"));
       await driver.waitFor(find.text("Male"));
       await driver.waitFor(find.text("Female"));
       await driver.waitFor(find.byValueKey("inputName"));
@@ -32,7 +33,16 @@ void main() {
       await driver.tap(find.byValueKey("inputName"));
       sleep(Duration(seconds: 5));
       await driver.enterText("Nutty");
-      sleep(Duration(seconds: 5));
+      await driver.tap(find.byValueKey("age"));
+      sleep(Duration(seconds: 3));
+      await driver.tap(find.text("21-25"));
+      sleep(Duration(seconds: 3));
+      await driver.tap(find.byValueKey("next"));
+      sleep(Duration(seconds: 3));
+
+
+      
+
     });
   });
 }

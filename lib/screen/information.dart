@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:voca/routes.dart';
 
 class InformationPage extends StatefulWidget {
   InformationPage({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class InformationPage extends StatefulWidget {
 
 class _InformationPageState extends State<InformationPage> {
   late TextEditingController ageController = new TextEditingController();
+  late String genderSelected = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +100,7 @@ class _InformationPageState extends State<InformationPage> {
             color: Color(0xff407bff),
           ),
         ),
-        labelText: "Your age",
+        labelText: "How old are you",
         labelStyle: TextStyle(
           color: Color(0xff9d9d9d),
         ),
@@ -143,32 +145,40 @@ class _InformationPageState extends State<InformationPage> {
     );
   }
 
-  Container getGenderSelect(String path, String gender) {
-    return Container(
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Color(0xff9d9d9d),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        children: [
-          Image.asset(
-            path,
-            width: Get.width * 0.3,
+  Widget getGenderSelect(String path, String gender) {
+    return GestureDetector(
+      key: Key("gender-select-$gender"),
+      onTap: (){
+        setState(() {
+          genderSelected = gender;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: genderSelected == gender? Color(0xff407bff):Color(0xff9d9d9d),
+            width: genderSelected == gender? 2:1,
           ),
-          Text(
-            gender,
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(
-                0xff9d9d9d,
-              ),
+        ),
+        child: Column(
+          children: [
+            Image.asset(
+              path,
+              width: Get.width * 0.3,
             ),
-          )
-        ],
+            Text(
+              gender,
+              style: TextStyle(
+                fontSize: 18,
+                color:  genderSelected == gender? Color(0xff407bff): Color(
+                  0xff9d9d9d,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -193,7 +203,9 @@ class _InformationPageState extends State<InformationPage> {
   Widget nextButton() {
     return GestureDetector(
       key: Key("next"),
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.homePage);
+      },
       child: Container(
         key: Key("next-button"),
         alignment: Alignment.center,
